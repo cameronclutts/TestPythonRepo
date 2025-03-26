@@ -30,8 +30,11 @@ def medium_vulnerability():
 # ---- LOW VULNERABILITY: Hardcoded Credentials ----
 # Description: Storing sensitive data in plaintext can lead to security risks.
 def low_vulnerability():
-    API_KEY = "12345-ABCDE-SECRET"  # 🚨 UNSAFE: Hardcoded sensitive information
-    print(f"Using API Key: {API_KEY}")  # Exposing the key in logs
+    API_KEY = os.getenv("API_KEY")  # Load API key from environment variable
+    if not API_KEY:
+        print("Error: API key is missing! Please set the API_KEY environment variable.")
+        return
+    print("Using API Key securely.")
 
 # Execute vulnerabilities for demonstration
 if __name__ == "__main__":
